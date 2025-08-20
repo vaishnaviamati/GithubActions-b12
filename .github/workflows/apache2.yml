@@ -1,0 +1,28 @@
+name: My First Workflow
+
+on: workflow_dispatch
+
+jobs:
+  Test:
+    runs-on: self-hosted
+   
+    steps:
+     - name: Code Checkout Repo 
+       uses: actions/checkout@v5 
+
+     
+     - name: Install Apache2
+       run: |
+          sudo apt update -y
+          sudo apt install -y apache2
+          sudo systemctl enable apache2
+          sudo systemctl start apache2
+
+     - name: Deploy sample index.html
+       run: |
+          echo "<h1>Hello from GitHub Actions Self-Hosted Runner </h1>" | sudo tee /var/www/html/index.html
+
+     - name: Verify Apache is running
+       run: |
+          systemctl status apache2 --no-pager
+          curl -I http://localhost
