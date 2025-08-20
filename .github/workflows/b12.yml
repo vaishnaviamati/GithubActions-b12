@@ -15,10 +15,16 @@ jobs:
           sleep 15 
 
        - name: Generating report
-         run: echo "this is sample report" > output.txt
+         run: echo "ALL TEST CASES PASSED ...!" > output.txt
 
        - name: Upload Artifact
          uses: actions/upload-artifact@v4
          with:
             name: test-report
             path: output.txt
+
+       - name: Download build output
+         uses: actions/download-artifact@v4
+         with:
+           name: test-report
+           path: ./restored-output.txt
