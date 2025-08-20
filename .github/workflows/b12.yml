@@ -1,0 +1,24 @@
+name: My Second Workflow
+on: push
+
+jobs:
+    Test:
+      runs-on: ubuntu-latest
+      
+      steps:
+       - name: Checkout code
+         uses: actions/checkout@v4
+
+       - name: Performing Test Cases
+         run: |
+          echo "testing the test cases"
+          sleep 15 
+
+       - name: Generating report
+         run: echo "this is sample report" > output.txt
+
+       - name: Upload Artifact
+         uses: actions/upload-artifact@v4
+         with:
+            name: test-report
+            path: output.txt
